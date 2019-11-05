@@ -2,6 +2,5 @@
 
 ## _Учебный проект_
 
-Преподаватель: Юрий Бура
-
+Автор курса: Юрий Бура
 Web: https://www.udemy.com/course/pro-react-redux/
