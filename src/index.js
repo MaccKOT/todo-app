@@ -17,13 +17,29 @@ const App = () => {
   const isLoggedIn = false;
   const welcomeBox = <button>Logout</button>;
 
+  //массив данных "Список дел". Обычно такая информация приходит с сервера
+  const todoData = [
+    {
+      label: "Drink Coffee",
+      important: false
+    },
+    {
+      label: "Make React App",
+      important: true
+    },
+    {
+      label: "Have a lunch",
+      important: false
+    }
+  ];
+
   return (
     <span>
       <span>{new Date().toString()}</span>
       {isLoggedIn ? welcomeBox : loginBox}
       <AppHeader />
       <SearchPanel />
-      <TodoList />
+      <TodoList todos={todoData} />
     </span>
   );
 };
