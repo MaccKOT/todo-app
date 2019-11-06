@@ -2,18 +2,19 @@ import React from "react";
 import TodoListItem from "./todo-list-item";
 
 const TodoList = () => {
-  const items = ["Learn React", "Build Awesome App"];
+  //JSX должен обязательно иметь один родительский элемент !!!
+  // <span>1</span><span>2</span> - невалидно, надо оборачивать в div
   return (
     <ul>
-      <li>{items[0]}</li>
-      <li>{items[1]}</li>
       <li>
-        <TodoListItem />
+        <TodoListItem label="Drink Coffee" />
+      </li>
+      <li>
+        <TodoListItem label="Make React App" important />
       </li>
     </ul>
 
-    //JSX должен обязательно иметь один родительский элемент !!!
-    // <span>1</span><span>2</span> - невалидно, надо оборачивать в div
+    // передаваемый important - без значение равнозначен important={true}
   );
 };
 

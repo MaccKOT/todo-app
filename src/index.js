@@ -17,8 +17,6 @@ const App = () => {
   const isLoggedIn = false;
   const welcomeBox = <button>Logout</button>;
 
-  const evilvalue = "<script>alert('')</script>"; // пример злобного кода, который передал пользователь - при выводе он будет "эскейпиться", то есть выведется текстом, а не выполнится как код
-
   return (
     <span>
       <span>{new Date().toString()}</span>
@@ -26,9 +24,6 @@ const App = () => {
       <AppHeader />
       <SearchPanel />
       <TodoList />
-
-      <br />
-      {evilvalue}
     </span>
   );
 };
