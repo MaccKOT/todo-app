@@ -5,6 +5,9 @@ import ReactDOM from "react-dom";
 import AppHeader from "./components/app-header";
 import SearchPanel from "./components/search-panel";
 import TodoList from "./components/todo-list";
+import ItemStatusFilter from "./components/item-status-filter";
+
+import "./index.css";
 
 //Собираем наше приложение из компонентов
 //JSX компоненты должны начинаться с Большой буквы, иначе они будут рассматриваться как обычный тег
@@ -12,35 +15,35 @@ import TodoList from "./components/todo-list";
 // значения null, undefined, true, false не являются ошибкой, а просто не отображаются на странице
 
 const App = () => {
-  //loginBox - объявление реакт-элемента внутри компонента
-  const loginBox = <button>Log in, please</button>;
-  const isLoggedIn = false;
-  const welcomeBox = <button>Logout</button>;
-
   //массив данных "Список дел". Обычно такая информация приходит с сервера
   const todoData = [
     {
       label: "Drink Coffee",
-      important: false
+      important: false,
+      id: 1
     },
     {
       label: "Make React App",
-      important: true
+      important: true,
+      id: 2
     },
     {
       label: "Have a lunch",
-      important: false
+      important: false,
+      id: 3
     }
   ];
 
   return (
-    <span>
-      <span>{new Date().toString()}</span>
-      {isLoggedIn ? welcomeBox : loginBox}
-      <AppHeader />
-      <SearchPanel />
+    <div className="todo-app">
+      <AppHeader toDo={1} done={3} />
+      <div className="top-panel d-flex">
+        <SearchPanel />
+        <ItemStatusFilter />
+      </div>
+
       <TodoList todos={todoData} />
-    </span>
+    </div>
   );
 };
 
