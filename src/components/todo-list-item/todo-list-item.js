@@ -9,6 +9,24 @@ import "./todo-list-item.css";
 //делаем через классы, чтобы сохранять состояние
 
 export default class TodoListItem extends Component {
+  //чтобы избежать bind, создадим функцию конструктор. Это консервативный способ создавать обработчики событий
+  // constructor() {
+  //   super();
+  //   this.onLabelClick = () => {
+  //     console.log(`Click! ${this.props.label}`);
+  //   };
+  // }
+
+  //самый новейший способ из предложений. Функция-стрелка сохраняет this
+  onLabelClick = () => {
+    console.log(`Click! ${this.props.label}`);
+  };
+
+  //Функция, которая вызывается при клике. Метку получаем через props
+  // onLabelClick() {
+  //   console.log(`Click! ${this.props.label}`);
+  // }
+
   render() {
     const { label, important = false } = this.props;
 
@@ -19,7 +37,13 @@ export default class TodoListItem extends Component {
 
     return (
       <span className="todo-list-item">
-        <span className="todo-list-item-label" style={style}>
+        <span
+          className="todo-list-item-label"
+          style={style}
+          onClick={this.onLabelClick}
+          //onClick={this.onLabelClick} - потеряет контекст this, если не ()=>
+          //onClick={this.onLabelClick.bind(this)} - плохой способ, создаёт функцию обёртку
+        >
           {label}
         </span>
 
