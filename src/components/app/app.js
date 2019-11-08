@@ -41,7 +41,10 @@ const App = () => {
         <ItemStatusFilter />
       </div>
 
-      <TodoList todos={todoData} />
+      <TodoList
+        todos={todoData}
+        onDeleted={id => console.log("ID to delete:" + id)}
+      />
     </div>
   );
 };

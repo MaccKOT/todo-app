@@ -2,7 +2,7 @@ import React from "react";
 import TodoListItem from "../todo-list-item/todo-list-item";
 import "./todo-list.css";
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ todos, onDeleted }) => {
   //JSX должен обязательно иметь один родительский элемент !!!
   // <span>1</span><span>2</span> - невалидно, надо оборачивать в div
 
@@ -11,7 +11,7 @@ const TodoList = ({ todos }) => {
     return (
       <li className="list-group-item" key={id}>
         {/* <TodoListItem label={item.label} important={item.important} /> */}
-        <TodoListItem {...itemProps} />
+        <TodoListItem {...itemProps} onDeleted={() => onDeleted(id)} />
       </li>
     );
   });
@@ -22,22 +22,5 @@ const TodoList = ({ todos }) => {
     // передаваемый important - без значение равнозначен important={true}
   );
 };
-
-//выводим элементы в лоб, просто перебирая элементы массива вручную
-// return (
-//   <ul>
-//     <li>
-//       <TodoListItem label={todos[0].label} important={todos[0].important} />
-//     </li>
-//     <li>
-//       <TodoListItem label={todos[1].label} important={todos[1].important} />
-//     </li>
-//     <li>
-//       <TodoListItem label={todos[2].label} important={todos[2].important} />
-//     </li>
-//   </ul>
-
-//   передаваемый important - без значение равнозначен important={true}
-// );
 
 export default TodoList;
