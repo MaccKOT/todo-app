@@ -26,17 +26,19 @@ export default class TodoListItem extends Component {
 
   //самый новейший способ из предложений. Функция-стрелка сохраняет this
   onLabelClick = () => {
-    console.log(`Click! ${this.props.label}`);
+    // console.log(`Click! ${this.props.label}`);
     //используем специальную функцию для установки состояния state
-    this.setState({
-      done: true
+    // done сразу деструктуризируем из state
+    this.setState(({ done }) => {
+      return { done: !done };
     });
   };
 
+  //setState асинхронная функция, поэтому мы не может просто так менять значения внутри state на основе текущего state (он может ещё не изменится), а мы должны передать текущий state в качестве параметра
   onMarkImportant = () => {
     //setState принимает объект, но нет необходимости передавать весь объект state. Достаточно передать только изменённые ключи.
-    this.setState({
-      important: true
+    this.setState(state => {
+      return { important: !state.important };
     });
   };
 
