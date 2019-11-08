@@ -16,10 +16,12 @@ export default class TodoListItem extends Component {
   //     done: false
   //   };
   // }
+
   //Инициализируем State (самый современный способ). Избавились от конструктора
   //после инициализации нельзя его изменять напрямую - только читать
   state = {
-    done: false
+    done: false,
+    important: false
   };
 
   //самый новейший способ из предложений. Функция-стрелка сохраняет this
@@ -31,33 +33,42 @@ export default class TodoListItem extends Component {
     });
   };
 
+  onMarkImportant = () => {
+    //setState принимает объект, но нет необходимости передавать весь объект state. Достаточно передать только изменённые ключи.
+    this.setState({
+      important: true
+    });
+  };
+
   render() {
-    const { label, important = false } = this.props;
+    const { label } = this.props;
 
-    const style = {
-      color: important ? "steelblue" : "black",
-      fontWeight: important ? "bold" : "normal"
-    };
+    //теперь это не нужно, потому что important мы получаем через state
+    // const style = {
+    //   color: important ? "steelblue" : "black",
+    //   fontWeight: important ? "bold" : "normal"
+    // };
 
-    const { done } = this.state;
+    const { done, important } = this.state;
     let classNames = "todo-list-item";
     if (done) {
       classNames += " done";
     }
 
+    if (important) {
+      classNames += " important";
+    }
+
     return (
       <span className={classNames}>
-        <span
-          className="todo-list-item-label"
-          style={style}
-          onClick={this.onLabelClick}
-        >
+        <span className="todo-list-item-label" onClick={this.onLabelClick}>
           {label}
         </span>
 
         <button
           type="button"
           className="btn btn-outline-success btn-sm float-right"
+          onClick={this.onMarkImportant}
         >
           <i className="fa fa-exclamation" />
         </button>
