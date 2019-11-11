@@ -76,6 +76,14 @@ export default class App extends Component {
     });
   };
 
+  //Функции, которые проверяют смену состояния в todo-list
+  onToggleImportant = id => {
+    console.log("toogle important id :", id);
+  };
+  onToggleDone = id => {
+    console.log("toogle done id :", id);
+  };
+
   render() {
     return (
       <div className="todo-app">
@@ -84,7 +92,12 @@ export default class App extends Component {
           <SearchPanel />
           <ItemStatusFilter />
         </div>
-        <TodoList todos={this.state.todoData} onDeleted={this.deleteItem} />
+        <TodoList
+          todos={this.state.todoData}
+          onDeleted={this.deleteItem}
+          onToggleImportant={this.onToggleImportant}
+          onToggleDone={this.onToggleDone}
+        />
         <ItemAddForm onItemAdded={this.addItem} />
       </div>
     );

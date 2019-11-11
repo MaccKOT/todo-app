@@ -19,31 +19,39 @@ export default class TodoListItem extends Component {
 
   //Инициализируем State (самый современный способ). Избавились от конструктора
   //после инициализации нельзя его изменять напрямую - только читать
-  state = {
-    done: false,
-    important: false
-  };
+  //теперь приходят через props сверху
+  // state = {
+  //   done: false,
+  //   important: false
+  // };
 
   //самый новейший способ из предложений. Функция-стрелка сохраняет this
-  onLabelClick = () => {
-    // console.log(`Click! ${this.props.label}`);
-    //используем специальную функцию для установки состояния state
-    // done сразу деструктуризируем из state
-    this.setState(({ done }) => {
-      return { done: !done };
-    });
-  };
+  // onLabelClick = () => {
+  //   // console.log(`Click! ${this.props.label}`);
+  //   //используем специальную функцию для установки состояния state
+  //   // done сразу деструктуризируем из state
+  //   this.setState(({ done }) => {
+  //     return { done: !done };
+  //   });
+  // };
 
   //setState асинхронная функция, поэтому мы не может просто так менять значения внутри state на основе текущего state (он может ещё не изменится), а мы должны передать текущий state в качестве параметра
-  onMarkImportant = () => {
-    //setState принимает объект, но нет необходимости передавать весь объект state. Достаточно передать только изменённые ключи.
-    this.setState(state => {
-      return { important: !state.important };
-    });
-  };
+  // onMarkImportant = () => {
+  //   //setState принимает объект, но нет необходимости передавать весь объект state. Достаточно передать только изменённые ключи.
+  //   this.setState(state => {
+  //     return { important: !state.important };
+  //   });
+  // };
 
   render() {
-    const { label, onDeleted } = this.props;
+    const {
+      label,
+      onDeleted,
+      onToggleImportant,
+      onToggleDone,
+      important,
+      done
+    } = this.props;
 
     //теперь это не нужно, потому что important мы получаем через state
     // const style = {
@@ -51,7 +59,6 @@ export default class TodoListItem extends Component {
     //   fontWeight: important ? "bold" : "normal"
     // };
 
-    const { done, important } = this.state;
     let classNames = "todo-list-item";
     if (done) {
       classNames += " done";
@@ -62,14 +69,14 @@ export default class TodoListItem extends Component {
 
     return (
       <span className={classNames}>
-        <span className="todo-list-item-label" onClick={this.onLabelClick}>
+        <span className="todo-list-item-label" onClick={onToggleDone}>
           {label}
         </span>
 
         <button
           type="button"
           className="btn btn-outline-success btn-sm float-right"
-          onClick={this.onMarkImportant}
+          onClick={onToggleImportant}
         >
           <i className="fa fa-exclamation" />
         </button>
