@@ -16,6 +16,9 @@ export default class ItemAddForm extends Component {
   onSubmit = event => {
     event.preventDefault();
     this.props.onItemAdded(this.state.label);
+    this.setState({
+      label: ""
+    });
   };
 
   render() {
@@ -27,7 +30,9 @@ export default class ItemAddForm extends Component {
           onChange={this.onLabelChange}
           placeholder="What needs to be done"
           aria-label={this.state.label}
+          value={this.state.label}
         />
+        {/* value={this.state.label} - делаем элемент контроллируемым нами */}
         <button className="btn btn-outline-secondary">Add</button>
       </form>
     );
