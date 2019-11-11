@@ -56,7 +56,6 @@ export default class TodoListItem extends Component {
     if (done) {
       classNames += " done";
     }
-
     if (important) {
       classNames += " important";
     }
